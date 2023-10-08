@@ -1,5 +1,10 @@
+import AdminHeader from './components/AdminHeader'
 import './globals.css'
 import { Inter } from 'next/font/google'
+import AdminAside from './components/AdminAside'
+import { AdminContextProvider } from './Adminlogic/Logic'
+import {ToastContainer } from 'react-toastify'
+import "react-toastify/dist/ReactToastify.css"
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -11,7 +16,16 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body >
+        <AdminHeader />
+        < ToastContainer />
+        <AdminAside />
+        <AdminContextProvider>{children}</AdminContextProvider>
+      </body>
     </html>
   )
 }
+
+
+
+

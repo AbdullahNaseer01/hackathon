@@ -24,7 +24,9 @@ const ProdctsForm = () => {
     handleCategoryChange,
     handleClosePopup,
     setPopupOpen,
-    handleAvailabilityChange, } = useAdminContext();
+    handleAvailabilityChange,
+    handleCancleBtn
+   } = useAdminContext();
  
   // const handleAddStudent = async (e) => {
   //   e.preventDefault();
@@ -286,7 +288,7 @@ const ProdctsForm = () => {
           <button
             className="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded"
             type="button"
-            onClick={()=>handleClosePopup()}
+            onClick={()=>handleCancleBtn()}
             disabled={loading}
           >
             {loading ? <></> : <div className="flex justify-between"><span>cancel</span> <span className="text-xl mt-2 ml-2"><MdOutlineAddShoppingCart /></span></div>} {/* Show loading text while uploading */}

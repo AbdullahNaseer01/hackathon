@@ -12,11 +12,14 @@ const AdminAside = ({ isMenuToggle, signOut }) => {
       <aside className="fixed inset-y-0 left-0 bg-white shadow-md max-h-screen w-60">
         <div className="flex flex-col justify-between h-full">
           <div className="flex-grow">
+            <Link href='/'>
             <div className="px-4 py-6 text-center border-b">
               <h1 className="text-xl font-bold leading-none">
                 <span className="text-yellow-700">Admin</span> Panel
               </h1>
             </div>
+            </Link>
+            
             <div className="p-4">
               <ul className="space-y-1">
                 <li>

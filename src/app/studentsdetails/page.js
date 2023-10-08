@@ -9,7 +9,7 @@ import EditProductForm from '../components/EditProductForm'
 
 const page = () => {
 
-  const { handleClosePopup, handleOpenPopup, popUpOpen, setStudentsData, studentsData ,setLoading , popUpEditForm, setPopUpEditForm } = useAdminContext()
+  const { handleClosePopup, handleOpenPopup, popUpOpen, setStudentsData, studentsData, setLoading, popUpEditForm, setPopUpEditForm } = useAdminContext()
 
   useEffect(() => {
     const studentsCollection = collection(db, "studentsData");
@@ -33,13 +33,22 @@ const page = () => {
     console.log(studentsData);
   }, [studentsData]);
   return (
-    <main className=" sm:ml-60 pt-16  max-h-screen overflow-auto bg-slate-400 min-h-screen">
-      <button onClick={(e) => handleOpenPopup()} >opoen form</button>
-      <button onClick={(e) => handleClosePopup()}>close form</button>
+    <main className=" sm:ml-60 pt-16 pt-16 px-2 py-3  max-h-screen overflow-auto min-h-screen">
+      {/* <button onClick={(e) => handleOpenPopup()} >opoen form</button>
+      <button onClick={(e) => handleClosePopup()}>close form</button> */}
+
+      <button onClick={(e) => handleOpenPopup()} className="relative px-6 py-3 font-bold text-white rounded-lg group">
+        <span className="absolute inset-0 w-full h-full transition duration-300 transform -translate-x-1 -translate-y-1 bg-purple-800 ease opacity-80 group-hover:translate-x-0 group-hover:translate-y-0" />
+        <span className="absolute inset-0 w-full h-full transition duration-300 transform translate-x-1 translate-y-1 bg-pink-800 ease opacity-80 group-hover:translate-x-0 group-hover:translate-y-0 mix-blend-screen" />
+        <span className="relative">Add New Student</span>
+      </button>
 
       <AdminTables />
       {popUpOpen && <AddProductsForm />}
-      {popUpEditForm && <EditProductForm/>}
+      {popUpEditForm && <EditProductForm />}
+
+
+
     </main>
   )
 }

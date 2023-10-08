@@ -16,8 +16,10 @@ export default function useAdminLogic() {
   const [category, setCategory] = useState("fruits"); // Initialize with a default category
   const [products, setProducts] = useState([]);
   const [studentsData, setStudentsData] = useState([]);
+  const [coursesData, setCoursesData] = useState([]);
   const [popUpOpen, setPopupOpen] = useState(false);
   const [popUpEditForm, setPopUpEditForm] = useState(false)
+  const [editCourseId, setEditCourseId] = useState("")
 
   // State to manage form data
   const [formData, setFormData] = useState({
@@ -28,6 +30,12 @@ export default function useAdminLogic() {
     address: "",
     cnic: "",
   });
+  const [courseFormData, setCourseFormData] = useState({
+    courseCode: "",
+    courseTitle: "",
+    description: "",
+    duration: "",
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -35,6 +43,10 @@ export default function useAdminLogic() {
       ...formData,
       [name]: value,
     });
+    setCourseFormData({
+      ...courseFormData,
+      [name]: value
+    })
   };
 
   const handleCategoryChange = (e) => {
@@ -61,6 +73,29 @@ export default function useAdminLogic() {
     setPopupOpen(true);
     console.log("openPopup called", popUpOpen);
   };
+
+ const  handleCancleBtn = ()=>{
+    setPopupOpen(false)
+    setPopUpEditForm(false)
+    setFormData(
+
+    {fullName: "",
+    fatherName: "",
+    phone: "",
+    emailAddress: "",
+    address: "",
+    cnic: "",
+  },
+  setCourseFormData(
+    {
+      courseCode: "",
+      courseTitle: "",
+      description: "",
+      duration: "",
+    }
+  )
+    )
+  }
 
   const handleClosePopup = () => {
     setPopupOpen(false);
@@ -101,7 +136,15 @@ export default function useAdminLogic() {
     editStudentId,
     setEditStudentId,
     popUpEditForm,
-    setPopUpEditForm
+    setPopUpEditForm,
+    handleCancleBtn,
+    setEditCourseId,
+    editCourseId,
+    courseFormData,
+    setCourseFormData,
+    coursesData,
+    setCoursesData
+    
   };
 }
 

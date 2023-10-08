@@ -34,63 +34,52 @@ const EditProductForm = () => {
         editProductId,
         setEditProductId,
         popUpEditForm,
-        setPopUpEditForm
+        setPopUpEditForm,
+        editStudentId,
+        handleCancleBtn
     } = useAdminContext()
 
-    const updateProduct = async () => {
-        const productRef = doc(db, "products", editProductId); // Replace 'productId' with the ID of the product you want to update.
-
+    const updateStudent = async () => {
+        const studentRef = doc(db, "studentsData", editStudentId); // Replace 'editStudentId' with the ID of the student you want to update.
+    
         try {
-            setLoading(true);
-
-            let imageUrl = formData.imageFile; // Initialize imageUrl with the existing image URL or the new image URL.
-            console.log(imageUrl);
-
-            if (imageFile) {
-                // If a new image is provided, upload it and get the new URL.
-                const storageRef = ref(storage, `${formData.title}`);
-                const snapshot = await uploadBytes(storageRef, imageFile);
-                imageUrl = await getDownloadURL(snapshot.ref)
-                console.log(imageUrl, "image uploaded successfully");
-            }
-
-            // Create an object with updated data.
-            const updatedData = {
-                title: formData.title,
-                price: formData.price,
-                description: formData.description,
-                tagline: formData.tagline,
-                availability: formData.availability,
-                category: formData.category,
-                imageFile: imageUrl, // Use the updated or existing image URL.
-            };
-            console.log(updatedData, "Updated data");
-
-            // Update the product document in Firestore.
-            await updateDoc(productRef, updatedData);
-
-            // Clear formData or take any other necessary action here.
-            setFormData({
-                title: "",
-                price: "",
-                description: "",
-                tagline: "",
-                availability: "In stock",
-                category: "others",
-            });
-            setImageFile(null);
-
-            toast.success("Product Updated Successfully");
+          setLoading(true);
+    
+          // Create an object with updated data.
+          const updatedData = {
+            fullName: formData.fullName,
+            fatherName: formData.fatherName,
+            phone: formData.phone,
+            emailaddress: formData.emailAddress,
+            address: formData.address,
+            cnic: formData.cnic,
+            // Add other fields as needed
+          };
+    
+          // Update the student document in Firestore.
+          await updateDoc(studentRef, updatedData);
+    
+          // Clear formData or take any other necessary action here.
+          setFormData({
+            fullName: "",
+            fatherName: "",
+            phone: "",
+            emailAddress: "",
+            address: "",
+            cnic: "",
+            // Clear other fields as needed
+          });
+    
+          toast.success("Student Data Updated Successfully");
         } catch (error) {
-            // Handle any errors that occur during the process.
-            console.error(error);
-            toast.error(error.message, "Please try again later");
+          // Handle any errors that occur during the process.
+          console.error(error);
+          toast.error(error.message, "Please try again later");
         } finally {
-            setLoading(false);
-            // handleClosePopup()
             setPopupOpen(false);
+          setLoading(false);
         }
-    };
+      };
 
 
     return (
@@ -210,15 +199,15 @@ const EditProductForm = () => {
                     <button
                         className="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded"
                         type="button"
-                        // onClick={handleAddStudent}
+                        onClick={updateStudent}
                         disabled={loading}
                     >
-                        {loading ? <div>Registering Student<span className="text-2xl"> <LuLoader /></span></div> : <div className="flex justify-between"><span>Register Student</span> <span className="text-xl mt-2 ml-2"><MdOutlineAddShoppingCart /></span></div>} {/* Show loading text while uploading */}
+                        {loading ? <div>updating <span className="text-2xl"> <LuLoader /></span></div> : <div className="flex justify-between"><span>Update Student Data</span> <span className="text-xl mt-2 ml-2"><MdOutlineAddShoppingCart /></span></div>} {/* Show loading text while uploading */}
                     </button>
                     <button
                         className="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded"
                         type="button"
-                        // onClick={() => ()}
+                        onClick={()=>handleCancleBtn()}
                         disabled={loading}
                     >
                         {loading ? <></> : <div className="flex justify-between"><span>cancel</span> <span className="text-xl mt-2 ml-2"><MdOutlineAddShoppingCart /></span></div>} {/* Show loading text while uploading */}
@@ -233,66 +222,3 @@ const EditProductForm = () => {
 }
 
 export default EditProductForm
-
-
-
-
-
-
-
-
-// const handleEditProduct = async (e) => {
-//     if (editProductId) {
-//         const docRef = doc(db, "products", editNoteId);
-//         await updateDoc(docRef, {
-//             noteTitle: formData.title,
-//             noteDesc: formData.description,
-//             date: formData.date,
-//             color: formData.color
-//         });
-//     }
-// };
-// const handleEditProduct = ()=>{
-//     setLoading(true);
-//     if (editProductId) {
-//         const docRef = doc(db, "products", editProductId);
-//         updateDoc(docRef, {
-//             title: formData.title,
-//             description: formData.description,
-//             price: formData.price,
-//             category: formData.category,
-//             availability: formData.availability
-//         }).then(() => {
-//             setLoading(false);
-//             setFormData({
-//                 title: "",
-//                 description: "",
-//                 price: "",
-//                 category: "",
-//                 availability: ""
-//             });
-//             closePopup();
-//         });
-//     }
-// }
-
-
-// const handleEditProduct = ()=>{
-//     console.log(editProductId)
-// }
-
-
-
-
-// import React from 'react'
-// import { AdminContextProvider } from '../(Adminlogic)/Logic'
-
-// const EditProductForm = () => {
-
-//     const {formData} = AdminContextProvider
-//   return (
-//     <div>EditProductForm</div>
-//   )
-// }
-
-// export default EditProductForm

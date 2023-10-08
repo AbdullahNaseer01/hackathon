@@ -8,7 +8,7 @@ import { toast } from "react-toastify"
 import { useAdminContext } from "../Adminlogic/Logic";
 
 
-const AdminTables = ({ }) => {
+const CoursesTables = ({ }) => {
     const {
         imageFile,
         setImageFile,
@@ -35,15 +35,21 @@ const AdminTables = ({ }) => {
         setStudentsData,
         editStudentId,
         setEditStudentId,
-        setPopUpEditForm
+        setPopUpEditForm,
+        courseFormData,
+        setCourseFormData,
+        coursesData,
+        setCoursesData,
+        editCourseId,
+        setEditCourseId,
 
     } = useAdminContext()
 
-    const handleDeleteStudent = async (student) => {
-        console.log(student, "student")
+    const handleDeleteCourse = async (course) => {
+        console.log(course, "course")
         try {
-            await deleteDoc(doc(db, "studentsData", student.id));
-            toast.success("Student has been Deleted Successfully!!");
+            await deleteDoc(doc(db, "coursesData", course.id));
+            toast.success("Course has been Deleted Successfully!!");
         } catch (error) {
             console.error("Error deleting document: ", error);
             toast.error("Some issue while deleting try Again Later");
@@ -53,7 +59,7 @@ const AdminTables = ({ }) => {
 
     return (
         <>
-            <div className="w-full mt-12">
+            <div className=" w-full mt-12">
                 <p className="text-xl pb-3 flex items-center">
                     <i className="fas fa-list mr-3"></i>{category} Products
                 </p>
@@ -67,32 +73,21 @@ const AdminTables = ({ }) => {
                                 </th>
                                 <th
                                     className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                    Student Name
+                                    Course Title
                                 </th>
                                 <th
                                     className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                    Father Name
+                                    Course Code
                                 </th>
                                 <th
                                     className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                    CNIC
+                                    Description
                                 </th>
                                 <th
                                     className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                    Phone
+                                    Duration
                                 </th>
-                                <th
-                                    className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                    Email Address
-                                </th>
-                                <th
-                                    className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                    Address
-                                </th>
-                                <th
-                                    className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                    Delete
-                                </th>
+
                                 <th
                                     className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                                     Edit
@@ -101,10 +96,10 @@ const AdminTables = ({ }) => {
                             </tr>
                         </thead>
                         <tbody>
-                            {studentsData.map((student) => (
-                                <tr key={student.id}>
+                            {coursesData.map((course) => (
+                                <tr key={course.id}>
                                     <td className="px-5 py-3 border-b border-gray-200 bg-white text-sm">
-                                        <p className="text-gray-900 whitespace-no-wrap">{student.id}</p>
+                                        <p className="text-gray-900 whitespace-no-wrap">{course.id}</p>
                                     </td>
                                     {/* <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                         <div className="flex items-center">
@@ -121,31 +116,41 @@ const AdminTables = ({ }) => {
                                         </div>
                                     </td> */}
                                     <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                        <p className="text-gray-900 whitespace-no-wrap">{student.fullName}</p>
+                                        <p className="text-gray-900 whitespace-no-wrap">{course.courseTitle}</p>
                                     </td>
                                     <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                         <span
                                             className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
                                             <span aria-hidden
                                                 className="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
-                                            <span className="relative">{student.fatherName}</span>
+                                            <span className="relative">{course.courseCode}</span>
                                         </span>
                                     </td>
                                     <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                        <p className="text-gray-900 whitespace-no-wrap">{student.cnic}</p>
+                                        <p className="text-gray-900 whitespace-no-wrap">{course.description}</p>
                                     </td>
                                     <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                        <p className="text-gray-900 whitespace-no-wrap">{student.phone}</p>
+                                        <p className="text-gray-900 whitespace-no-wrap">{course.duration}</p>
+                                    </td>
+                                    {/* <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm" onClick={() => { handleDeleteCourse(course) }}>
+                                        <p className="text-gray-900 whitespace-no-wrap">Delete <AiFillDelete /></p>
                                     </td>
                                     <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                        <p className="text-gray-900 whitespace-no-wrap">{student.emailAddress}</p>
-                                    </td>
-                                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                        <p className="text-gray-900 whitespace-no-wrap">{student.address}</p>
-                                    </td>
-                                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm cursor-pointer"
-                                        onClick={() => { handleDeleteStudent(student) }}>
-                                        <p className="text-red-500 hover:text-red-700 transition duration-300 ease-in-out">
+                                        <p className="text-gray-900 whitespace-no-wrap" onClick={() => {
+                                            setPopUpEditForm(true)
+                                            setEditCourseId(course.id)
+                                            setCourseFormData({
+                                                courseCode: courseFormData.courseCode,
+                                                courseTitle: courseFormData.courseTitle,
+                                                description: courseFormData.description,
+                                                duration: courseFormData.duration,
+                                            });
+                                            console.log(course)
+                                        }} >Edit <FiEdit3 /></p>
+                                    </td> */}
+                                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm cursor-pointer">
+                                        <p className="text-red-500 hover:text-red-700 transition duration-300 ease-in-out"
+                                            onClick={() => { handleDeleteCourse(course) }}>
                                             Delete <AiFillDelete />
                                         </p>
                                     </td>
@@ -153,20 +158,19 @@ const AdminTables = ({ }) => {
                                         <p className="text-green-500 hover:text-green-700 transition duration-300 ease-in-out"
                                             onClick={() => {
                                                 setPopUpEditForm(true);
-                                                setEditStudentId(student.id);
-                                                setFormData({
-                                                    fullName: student.fullName,
-                                                    fatherName: student.fatherName,
-                                                    phone: student.phone,
-                                                    emailAddress: student.emailAddress,
-                                                    address: student.address,
-                                                    cnic: student.cnic,
+                                                setEditCourseId(course.id);
+                                                setCourseFormData({
+                                                    courseCode: courseFormData.courseCode,
+                                                    courseTitle: courseFormData.courseTitle,
+                                                    description: courseFormData.description,
+                                                    duration: courseFormData.duration,
                                                 });
-                                                console.log(student);
+                                                console.log(course);
                                             }}>
                                             Edit <FiEdit3 />
                                         </p>
                                     </td>
+
 
                                 </tr>
                             ))}
@@ -179,4 +183,4 @@ const AdminTables = ({ }) => {
     )
 }
 
-export default AdminTables
+export default CoursesTables

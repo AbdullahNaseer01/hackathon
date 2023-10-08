@@ -69,10 +69,10 @@ export default function Home() {
           </div>
         </div>
         <h1 className="text-3xl sm:text-4xl xl:text-5xl font-bold text-gray-700 mt-12 group-hover:text-gray-50">
-          42.34%
+          42
         </h1>
         <div className="flex flex-row justify-between group-hover:text-gray-200">
-          <p>Bounce Rate</p>
+          <p>Registered Students</p>
           <span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -122,10 +122,10 @@ export default function Home() {
           </div>
         </div>
         <h1 className="text-3xl sm:text-4xl xl:text-5xl font-bold text-gray-700 mt-12 group-hover:text-gray-50">
-          42.34%
+          10
         </h1>
         <div className="flex flex-row justify-between group-hover:text-gray-200">
-          <p>Page Per Visits</p>
+          <p>Courses Available</p>
           <span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -180,10 +180,10 @@ export default function Home() {
           </div>
         </div>
         <h1 className="text-3xl sm:text-4xl xl:text-5xl font-bold text-gray-700 mt-12 group-hover:text-gray-50">
-          42.34k
+          9
         </h1>
         <div className="flex flex-row justify-between group-hover:text-gray-200">
-          <p>Total Monthly Visits</p>
+          <p>Total Absent Students</p>
           <span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -237,10 +237,10 @@ export default function Home() {
           </div>
         </div>
         <h1 className="text-3xl sm:text-4xl xl:text-5xl font-bold text-gray-700 mt-12 group-hover:text-gray-50">
-          00:03:20%
+          30
         </h1>
         <div className="flex flex-row justify-between group-hover:text-gray-200">
-          <p>Avg. Visit Duration</p>
+          <p>Present Students Today</p>
           <span>
             <svg
               xmlns="http://www.w3.org/2000/svg"

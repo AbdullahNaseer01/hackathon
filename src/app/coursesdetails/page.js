@@ -8,7 +8,7 @@ import { useAdminContext } from '../Adminlogic/Logic'
 import { onSnapshot, collection } from 'firebase/firestore'
 import { db } from '../../../firebase/firebaseConfig'
 
-const page = () => {
+const Page = () => {
 
   const { handleClosePopup, handleOpenPopup, popUpOpen, setStudentsData, studentsData, setLoading, popUpEditForm, setPopUpEditForm, CoursesData, setCoursesData, } = useAdminContext()
 
@@ -49,4 +49,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

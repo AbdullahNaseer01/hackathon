@@ -7,7 +7,7 @@ import { onSnapshot, collection } from 'firebase/firestore'
 import { db } from '../../../firebase/firebaseConfig'
 import EditProductForm from '../components/EditProductForm'
 
-const page = () => {
+const Page = () => {
 
   const { handleClosePopup, handleOpenPopup, popUpOpen, setStudentsData, studentsData, setLoading, popUpEditForm, setPopUpEditForm } = useAdminContext()
 
@@ -53,4 +53,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

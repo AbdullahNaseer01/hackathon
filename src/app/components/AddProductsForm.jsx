@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc , updateDoc , doc , arrayUnion} from "firebase/firestore";
 import { storage, db } from "../../../firebase/firebaseConfig";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
 import { ToastContainer, toast } from 'react-toastify';
@@ -11,6 +11,7 @@ import { useAdminContext } from "../Adminlogic/Logic";
 
 
 const ProdctsForm = () => {
+  const [selectedCourses, setSelectedCourses] = useState([]);
   const { 
     imageFile,
     setImageFile,
@@ -74,6 +75,66 @@ const ProdctsForm = () => {
       setLoading(false);
     }
   };
+  
+  // const handleAddStudent = async (e) => {
+  //   e.preventDefault();
+
+  //   if (
+  //     !formData.fullName ||
+  //     !formData.fatherName ||
+  //     !formData.phone ||
+  //     !formData.emailAddress ||
+  //     !formData.address ||
+  //     !formData.cnic
+  //   ) {
+  //     console.error("Please fill in all required fields.");
+  //     toast.error("Please fill in all required fields.");
+  //     return;
+  //   }
+
+  //   try {
+  //     setLoading(true);
+
+  //     // Create a new student document
+  //     const studentRef = await addDoc(collection(db, "studentsData"), {
+  //       fullName: formData.fullName,
+  //       fatherName: formData.fatherName,
+  //       phone: formData.phone,
+  //       emailAddress: formData.emailAddress,
+  //       address: formData.address,
+  //       cnic: formData.cnic,
+  //     });
+
+  //     // Register the student for selected courses
+  //     for (const YVvKhZyROmLRU2rWnpVY of selectedCourses) {
+  //       await updateDoc(doc(db, "coursesData", YVvKhZyROmLRU2rWnpVY), {
+  //         registeredStudents: arrayUnion(studentRef.id), // Add student ID to the course's registeredStudents array
+  //       });
+  //     }
+
+  //     // Clear formData, selectedCourses, or take any other necessary action here.
+  //     setFormData({
+  //       fullName: "",
+  //       fatherName: "",
+  //       phone: "",
+  //       emailAddress: "",
+  //       address: "",
+  //       cnic: "",
+  //     });
+  //     setSelectedCourses([]);
+
+  //     toast.success("Student Added and Registered for Courses Successfully");
+  //   } catch (error) {
+  //     // Handle any errors that occur during the process.
+  //     console.error(error);
+  //     toast.error(error.message, "Please try again later");
+  //   } finally {
+  //     setPopupOpen(false);
+  //     setLoading(false);
+  //   }
+  // };
+
+  
   return (
     <div className="leading-loose  flex items-center justify-center h-screen fixed inset-0  z-50">
       <form className="p-10 bg-white rounded shadow-xl">
@@ -180,11 +241,11 @@ const ProdctsForm = () => {
           <label className="hidden block text-sm text-gray-600" htmlFor="category">
             Category
           </label>
-          <select onChange={handleCategoryChange} value={formData.category} id="category" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-            <option value="course1">course1</option>
-            <option value="course2">course2</option>
-            <option value="course3">course3</option>
-            <option value="course4">course4</option>
+          <select onChange={(e)=>setSelectedCourses(e.target.value)} id="category" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+            <option value="YVvKhZyROmLRU2rWnpVY">AI</option>
+            <option value="YVvKhZyROmLRU2rWnpVY">AI</option>
+            <option value="YVvKhZyROmLRU2rWnpVY">AI</option>
+            <option value="YVvKhZyROmLRU2rWnpVY">AI</option>
           </select>
         </div>
         <div className="mt-6">
